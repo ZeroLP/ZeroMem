@@ -24,5 +24,10 @@ namespace ZeroMem
         {
             output.League();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            output.Notepad();
+        }
     }
 }

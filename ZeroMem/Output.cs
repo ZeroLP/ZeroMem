@@ -11,9 +11,10 @@ namespace ZeroMem.OP
     class Output
     {
         //Constructors
-        ZeroMem.RD.Reader reader = new ZeroMem.RD.Reader();
-        ZeroMem.OFM.OffsetManager Offset = new ZeroMem.OFM.OffsetManager();
-        ZeroMem.PM.ProcessManager ProcessManager = new ZeroMem.PM.ProcessManager();
+        RD.Reader reader = new RD.Reader();
+        WR.Writer writer = new WR.Writer();
+        OFM.OffsetManager Offset = new OFM.OffsetManager();
+        PM.ProcessManager ProcessManager = new PM.ProcessManager();
         Form1 MainForm;
 
         public void League()
@@ -36,6 +37,26 @@ namespace ZeroMem.OP
 
             MessageBox.Show($"LocalPlayer: {iAIHC}\nChampion: {iCN}\nGame Time: {GameTime}\nGame Version {iGV}\nChampion Range: {iAR}\nChampion Health: {iCH}\nPID: {Proc.Id}"); //OUTPUT
             MainForm.textBox1.Text = $"Base Address: {BaseAddress.ToString("X")}";
+        }
+
+
+        public void Notepad()
+        {
+            Process nProc = ProcessManager.GetProcess("Notepad");
+            if (nProc == null) return;
+            IntPtr nProcHandle = ProcessManager.GetProcessHandle(nProc);
+            IntPtr nBaseAddress = ProcessManager.GetBaseAddress(nProc);
+
+            
+            if (writer.WriteBytes(nProcHandle, 0x3FFF83, 10) == false)
+            {
+                MessageBox.Show("No bytes written!");
+                return;
+            };
+
+            MessageBox.Show("Wrote 10 bytes on 0x3FFF83 in Notepad");
+
+
         }
     }
 }
