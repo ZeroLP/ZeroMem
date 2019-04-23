@@ -1,4 +1,12 @@
 # ZeroMem
 Memory Reader / Writer
 
-Memory Writing Not Supported Yet. Soon™
+Fully Functional C# Memory Reader and Writer.
+
+## Reader
+-   ReadInt
+-   ReadFloat
+-   ReadString
+
+## Writer
+-   WriteBytes
